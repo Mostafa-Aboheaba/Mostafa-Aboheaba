@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
+const isProduction = process.env.NODE_ENV === 'production';
+const basePath = isProduction ? '/Mostafa-Aboheaba' : '';
+
 const nextConfig = {
   output: 'export',
+  basePath: basePath,
+  assetPrefix: basePath,
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/Mostafa-Aboheaba' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/Mostafa-Aboheaba' : '',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
 };
 
 module.exports = nextConfig;

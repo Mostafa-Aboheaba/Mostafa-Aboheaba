@@ -5,6 +5,7 @@ import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { MapPin, Calendar, Briefcase } from "lucide-react";
+import { getAssetPath } from "@/utils/paths";
 
 const Experience = () => {
   return (
@@ -98,7 +99,7 @@ const TimelineItem = ({ experience, index }: TimelineItemProps) => {
           {experience.companyLogo ? (
             <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
               <img
-                src={experience.companyLogo}
+                src={getAssetPath(experience.companyLogo)}
                 alt={experience.company}
                 className="w-full h-full object-contain p-1"
                 onError={(e) => {

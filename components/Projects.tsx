@@ -6,6 +6,7 @@ import { AnimatedSection } from "./AnimatedSection";
 import { AnimatedCard } from "./AnimatedCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { getAssetPath } from "@/utils/paths";
 
 export const Projects = () => {
   return (
@@ -36,7 +37,7 @@ export const Projects = () => {
                 >
                   {project.image && project.image !== "/placeholder-project-1.jpg" ? (
                     <Image
-                      src={project.image}
+                      src={getAssetPath(project.image)}
                       alt={project.name}
                       fill
                       className="object-contain"

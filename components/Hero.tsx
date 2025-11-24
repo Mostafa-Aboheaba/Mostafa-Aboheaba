@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { personalInfo } from "@/data/config";
 import { ArrowDown, ArrowUp, Github, Linkedin, MessageCircle, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getAssetPath } from "@/utils/paths";
 
 const socialLinks = [
   {
@@ -314,7 +315,7 @@ export const Hero = () => {
                   </motion.div>
                 ) : (
                   <motion.img
-                    src={personalInfo.photo || "/profile-photo.png"}
+                    src={getAssetPath(personalInfo.photo || "/profile-photo.png")}
                     alt={personalInfo.name}
                     className="w-full h-full rounded-full object-cover"
                     initial={{ scale: 1.1 }}
