@@ -1,5 +1,5 @@
 export const siteConfig = {
-  googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "G-NBH30ZVQC9", // Add your Google Analytics ID here (e.g., "G-XXXXXXXXXX")
+  googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "", // Add your Google Analytics ID here (e.g., "G-XXXXXXXXXX")
 };
 
 export const personalInfo = {
