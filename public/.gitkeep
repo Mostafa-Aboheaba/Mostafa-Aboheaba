@@ -1,0 +1,5 @@
+# Public Assets Folder
+
+Place your static assets (images, icons, etc.) in this folder.
+They will be accessible at the root path (e.g., /image.jpg)
+
