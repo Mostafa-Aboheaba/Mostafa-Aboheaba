@@ -5,6 +5,7 @@ import { personalInfo } from "@/data/config";
 import { ArrowDown, ArrowUp, Github, Linkedin, MessageCircle, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getAssetPath } from "@/utils/paths";
+import { trackSocialClick, trackCVDownload, trackNavigation } from "@/utils/analytics";
 
 const socialLinks = [
   {
@@ -176,12 +177,17 @@ export const Hero = () => {
             >
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
+                const handleSocialClick = () => {
+                  const platformName = social.name.toLowerCase().replace(/\s+/g, "_");
+                  trackSocialClick(platformName, social.url);
+                };
                 return (
                   <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleSocialClick}
                     className="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-300"
                     tabIndex={0}
                     aria-label={social.name}
@@ -207,6 +213,7 @@ export const Hero = () => {
                 download="Mostafa_Aboheaba_CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackCVDownload}
                 className="px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white rounded-lg font-semibold text-lg shadow-lg shadow-orange-500/50 text-center flex items-center justify-center gap-2"
                 tabIndex={0}
                 aria-label="Download CV"
@@ -221,6 +228,7 @@ export const Hero = () => {
               </motion.a>
               <motion.a
                 href="#projects"
+                onClick={() => trackNavigation("projects")}
                 className="px-8 py-4 bg-gray-800 dark:bg-gray-900 hover:bg-gray-700 dark:hover:bg-gray-800 text-white rounded-lg font-semibold text-lg text-center border border-gray-700 dark:border-gray-700"
                 tabIndex={0}
                 aria-label="View Projects"

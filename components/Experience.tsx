@@ -6,10 +6,24 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { MapPin, Calendar, Briefcase } from "lucide-react";
 import { getAssetPath } from "@/utils/paths";
+import { trackSectionView } from "@/utils/analytics";
+import { useEffect } from "react";
 
 const Experience = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      trackSectionView("experience");
+    }
+  }, [inView]);
+
   return (
     <section
+      ref={ref}
       id="experience"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black relative overflow-hidden"
     >

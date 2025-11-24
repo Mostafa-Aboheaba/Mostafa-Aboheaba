@@ -7,10 +7,25 @@ import { AnimatedCard } from "./AnimatedCard";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { getAssetPath } from "@/utils/paths";
+import { trackProjectClick, trackSectionView } from "@/utils/analytics";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 export const Projects = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      trackSectionView("projects");
+    }
+  }, [inView]);
+
   return (
     <section
+      ref={ref}
       id="projects"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >
@@ -91,6 +106,7 @@ export const Projects = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackProjectClick(project.name, project.liveUrl)}
                         className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors font-semibold"
                         tabIndex={0}
                         aria-label={`View live demo of ${project.name}`}

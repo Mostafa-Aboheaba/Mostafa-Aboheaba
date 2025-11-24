@@ -4,6 +4,8 @@ import { skills } from "@/data/config";
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { trackSectionView } from "@/utils/analytics";
+import { useEffect } from "react";
 
 const getProficiencyLevel = (level: number): "expert" | "advanced" | "intermediate" => {
   if (level >= 85) return "expert";
@@ -28,8 +30,20 @@ const getProficiencyDots = (level: number) => {
 };
 
 export const Skills = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      trackSectionView("skills");
+    }
+  }, [inView]);
+
   return (
     <section
+      ref={ref}
       id="skills"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >

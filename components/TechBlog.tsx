@@ -5,10 +5,25 @@ import { Calendar, Clock, ExternalLink } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import { AnimatedCard } from "./AnimatedCard";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { trackSectionView } from "@/utils/analytics";
+import { useEffect } from "react";
 
 export const TechBlog = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      trackSectionView("blog");
+    }
+  }, [inView]);
+
   return (
     <section
+      ref={ref}
       id="blog"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >

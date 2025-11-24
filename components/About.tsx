@@ -4,10 +4,25 @@ import { personalInfo } from "@/data/config";
 import { MapPin, Calendar } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { trackSectionView } from "@/utils/analytics";
+import { useEffect } from "react";
 
 export const About = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      trackSectionView("about");
+    }
+  }, [inView]);
+
   return (
     <section
+      ref={ref}
       id="about"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >

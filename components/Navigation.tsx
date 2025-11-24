@@ -5,6 +5,7 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo } from "@/data/config";
+import { trackNavigation } from "@/utils/analytics";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -81,6 +82,11 @@ export const Navigation = () => {
     setIsOpen(false);
     const sectionId = href.replace("#", "");
     setActiveSection(sectionId);
+    
+    // Track navigation click
+    if (sectionId !== "home") {
+      trackNavigation(sectionId);
+    }
     
     // Wait for menu to close before scrolling
     setTimeout(() => {

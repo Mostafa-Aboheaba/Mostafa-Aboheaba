@@ -4,6 +4,9 @@ import { personalInfo } from "@/data/config";
 import { Mail, Github, Linkedin, MessageCircle } from "lucide-react";
 import { AnimatedSection } from "./AnimatedSection";
 import { motion } from "framer-motion";
+import { trackSocialClick, trackEmailClick, trackSectionView } from "@/utils/analytics";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const socialLinks = [
   {
@@ -33,8 +36,20 @@ const socialLinks = [
 ];
 
 export const Contact = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      trackSectionView("contact");
+    }
+  }, [inView]);
+
   return (
     <section
+      ref={ref}
       id="contact"
       className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black"
     >
@@ -56,12 +71,21 @@ export const Contact = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
+                const handleClick = () => {
+                  if (social.name === "Email") {
+                    trackEmailClick();
+                  } else {
+                    const platformName = social.name.toLowerCase().replace(/\s+/g, "_");
+                    trackSocialClick(platformName, social.url);
+                  }
+                };
                 return (
                   <motion.a
                     key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleClick}
                     className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 border border-orange-200 dark:border-orange-500/10 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-orange-300 dark:hover:border-orange-500/30 transition-colors shadow-md hover:shadow-lg"
                     tabIndex={0}
                     aria-label={social.label}

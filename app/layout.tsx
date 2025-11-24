@@ -28,6 +28,7 @@ export default function RootLayout({
                 __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
+                  window.gtag = gtag;
                   gtag('js', new Date());
                   gtag('config', '${siteConfig.googleAnalyticsId}', {
                     page_path: window.location.pathname,
