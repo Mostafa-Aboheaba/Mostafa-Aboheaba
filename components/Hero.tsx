@@ -203,7 +203,10 @@ export const Hero = () => {
               variants={itemVariants}
             >
               <motion.a
-                href="#contact"
+                href={getAssetPath(personalInfo.cv)}
+                download="Mostafa_Aboheaba_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white rounded-lg font-semibold text-lg shadow-lg shadow-orange-500/50 text-center flex items-center justify-center gap-2"
                 tabIndex={0}
                 aria-label="Download CV"

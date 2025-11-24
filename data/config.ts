@@ -19,6 +19,7 @@ export const personalInfo = {
   linkedin: "mostafa-khalile",
   whatsapp: "+201028325558", // WhatsApp phone number with country code
   photo: "/profile-photo.png", // Path to your profile photo in the public folder
+  cv: "/Mostafa-Aboheaba.pdf", // Path to your CV PDF file in the public folder
   stats: {
     experience: "5+",
     projects: "20+",
