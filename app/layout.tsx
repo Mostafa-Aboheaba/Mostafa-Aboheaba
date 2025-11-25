@@ -32,7 +32,14 @@ export default function RootLayout({
                   gtag('js', new Date());
                   gtag('config', '${siteConfig.googleAnalyticsId}', {
                     page_path: window.location.pathname,
+                    debug_mode: ${process.env.NODE_ENV === 'development' ? 'true' : 'false'}
                   });
+                  
+                  // Debug logging in development
+                  if (${process.env.NODE_ENV === 'development'}) {
+                    console.log('[GA] Google Analytics initialized with ID: ${siteConfig.googleAnalyticsId}');
+                    console.log('[GA] You can test events in the browser console using: window.gtag("event", "test_event", {test: true})');
+                  }
                 `,
               }}
             />

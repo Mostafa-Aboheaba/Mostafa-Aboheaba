@@ -2,6 +2,9 @@
  * Google Analytics event tracking utility
  */
 
+// Enable debug mode in development
+const DEBUG = process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_GA_DEBUG === "true";
+
 // Extend Window interface for TypeScript
 declare global {
   interface Window {
@@ -19,11 +22,35 @@ export const trackEvent = (
     [key: string]: any;
   }
 ) => {
-  if (typeof window === "undefined" || !window.gtag) {
+  if (typeof window === "undefined") {
+    if (DEBUG) {
+      console.warn("[GA Debug] trackEvent called on server side:", eventName, eventParams);
+    }
     return;
   }
 
-  window.gtag("event", eventName, eventParams);
+  if (!window.gtag) {
+    if (DEBUG) {
+      console.warn("[GA Debug] gtag not initialized. Event not tracked:", eventName, eventParams);
+    }
+    return;
+  }
+
+  if (DEBUG) {
+    console.log("[GA Debug] Event tracked:", eventName, eventParams);
+  }
+
+  try {
+    window.gtag("event", eventName, eventParams);
+    
+    if (DEBUG) {
+      console.log("[GA Debug] Event sent to Google Analytics successfully");
+    }
+  } catch (error) {
+    if (DEBUG) {
+      console.error("[GA Debug] Error tracking event:", error);
+    }
+  }
 };
 
 /**
