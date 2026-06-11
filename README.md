@@ -41,7 +41,7 @@ Over the years, I've helped deliver production-grade applications across differe
 * 📱 Flutter & Mobile Engineering
 * 🏗️ Clean Architecture
 * 🔄 CI/CD & Delivery Automation
-* 💳 Payment & FinTech Solutions
+* 💳 Payment & Invoice Solutions
 * 🤖 AI-Powered Features
 * 🧠 Agentic Development Workflows
 * 🚀 Product Engineering
