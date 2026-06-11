@@ -28,6 +28,8 @@
   <a href="https://github.com/Mostafa-Aboheaba">GitHub</a>
 </p>
 
+⚠️ Note: Contribution graph may not reflect all work due to private org repos.
+
 ---
 
 ## 🚀 About Me
